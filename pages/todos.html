@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todos</title>
+</head>
+<body>
+    <h1>Todos</h1>
+    <div id="todos-container"></div>
+    <script>
+        fetch('https://jsonplaceholder.typicode.com/todos')
+            .then(response => response.json())
+            .then(todos => {
+                const container = document.getElementById('todos-container');
+                todos.forEach(todo => {
+                    const div = document.createElement('div');
+                    div.textContent = `${todo.id}: ${todo.title} (${todo.completed ? 'Completed' : 'Not Completed'})`;
+                    container.appendChild(div);
+                });
+            })
+            .catch(error => console.error('Error fetching todos:', error));
+    </script>
+</body>
+</html>
